@@ -22,21 +22,18 @@ def DetectarLineas(img, plot=False):
 
     # Ploteo de las lineas detectadas (Opcional)
     if plot:
+
         plt.imshow(img, cmap='gray')
 
         cont_h = 0
         for idx, val in enumerate(box_rows):
-
-            if val < 260:
-                plt.axhline(y=idx, color='red', linewidth=1)
-                cont_h += 1
+            plt.axhline(y=val, color='red', linewidth=1)
+            cont_h += 1
 
         cont_v = 0
         for idx, val in enumerate(box_cols):
-
-            if val < 280:
-                plt.axvline(x=idx, color='red', linewidth=1)
-                cont_v += 1
+            plt.axvline(x=val, color='red', linewidth=1)
+            cont_v += 1
 
         plt.title(f'Cantidad de lineas horizontales: {cont_h}, cantidad de lineas verticales: {cont_v}')
         plt.show()
@@ -100,6 +97,7 @@ def DetectarRenglones(preguntas):
         pregunta_umbralizada[pregunta_umbralizada == 0] = 255
         pregunta_umbralizada[(pregunta_umbralizada >= 30) & (pregunta_umbralizada <= 33)] = 0
         pregunta_umbralizada[pregunta_umbralizada > 0] = 255
+
 
         # Sumamos los pixeles por fila
 
@@ -165,7 +163,7 @@ def CorregirRespuestas(preguntas, indices, renglones):
         # Definimos un rango aproximado de donde se encuenta la pregunta
         # Y umbralizamos de forma que nos quede una imagen binaria
 
-        respuesta = pregunta[renglon-14:renglon, indice[0] : indice[1]].copy()
+        respuesta = pregunta[renglon-14:renglon, indice[0]:indice[1]].copy()
         respuesta[respuesta <= 150] = 1
         respuesta[respuesta > 150] = 255
 
@@ -348,22 +346,25 @@ def MostrarCorreciones(correcion,  campo_nombre):
 # Correcion de todos los examenes
 
 lista_img = []
+
 for id in range(1,6):
 
-    ruta = f'TUIA_PDI_TP1/examen_{id}.png'
+    ruta = f'examen_{id}.png'
     img = cv2.imread(ruta, cv2.IMREAD_GRAYSCALE)
 
     box_rows, box_cols, datos_row = DetectarLineas(img, plot=False)
     preguntas = DetectarPreguntas(img, box_rows, box_cols, plot=False)
-    
+
     renglones = DetectarRenglones(preguntas)
     indices = DetectarIndices(preguntas, renglones)
+
+    print(f' \nExamen Nro {id}. \n')
     correcion = CorregirRespuestas(preguntas, indices, renglones)
-    
+
     indicesDatos = DetectarIndicesDatos(img, datos_row, plot=False)
     campo_nombre = CorregirDatos(img, indicesDatos, datos_row)
     nombre_copia = MostrarCorreciones(correcion,  campo_nombre)
-    
+
     lista_img.append(nombre_copia)
 
 
