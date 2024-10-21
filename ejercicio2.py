@@ -32,7 +32,7 @@ def DetectarLineas(img, plot=False):
 
         cont_v = 0
         for idx, val in enumerate(box_cols):
-            plt.axvline(x=val, color='red', linewidth=1)
+            plt.axvline(x=idx, color='red', linewidth=1)
             cont_v += 1
 
         plt.title(f'Cantidad de lineas horizontales: {cont_h}, cantidad de lineas verticales: {cont_v}')
