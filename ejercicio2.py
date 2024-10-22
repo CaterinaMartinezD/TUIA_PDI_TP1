@@ -26,8 +26,8 @@ def DetectarLineas(img, plot=False):
         plt.imshow(img, cmap='gray')
 
         cont_h = 0
-        for val in box_rows:
-            plt.axhline(y=val, color='red', linewidth=1)
+        for idx in box_rows:
+            plt.axhline(y=idx, color='red', linewidth=1)
             cont_h += 1
 
         cont_v = 0
