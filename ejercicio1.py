@@ -4,8 +4,6 @@ import numpy as np
 
 img = cv2.imread("Imagen_con_detalles_escondidos.tif", cv2.IMREAD_GRAYSCALE)
 
-plt.imshow(img, cmap="gray")
-plt.show()
 
 def equalizacion_local(img, tamaño_ventana, truncate=False):
 
