@@ -17,7 +17,6 @@ def equalizacion_local(img, tamaño_ventana, truncate=False):
   if truncate:
      resultado[resultado > 200] = 255
      resultado[(resultado > 0) & (resultado < 15)] = 8
-
   img_bordes = cv2.copyMakeBorder(resultado, borde_m, borde_m, borde_n, borde_n, cv2.BORDER_REFLECT)
 
   for fila in range(rows):
