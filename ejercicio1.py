@@ -8,8 +8,8 @@ img = cv2.imread("Imagen_con_detalles_escondidos.tif", cv2.IMREAD_GRAYSCALE)
 def equalizacion_local(img, tamaño_ventana, truncate=False):
 
   m, n = tamaño_ventana
-  borde = max(m, n)
-  borde = borde//2
+  borde_m = m//2
+  borde_n = n//2
 
   resultado = img.copy()
   rows, col = resultado.shape
@@ -18,7 +18,7 @@ def equalizacion_local(img, tamaño_ventana, truncate=False):
      resultado[resultado > 200] = 255
      resultado[(resultado > 0) & (resultado < 15)] = 8
 
-  img_bordes = cv2.copyMakeBorder(resultado, borde, borde, borde, borde, cv2.BORDER_REFLECT)
+  img_bordes = cv2.copyMakeBorder(resultado, borde_m, borde_m, borde_n, borde_n, cv2.BORDER_REFLECT)
 
   for fila in range(rows):
     for columna in range(col):
