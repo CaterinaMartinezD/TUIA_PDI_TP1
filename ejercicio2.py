@@ -151,7 +151,7 @@ def DetectarIndices(preguntas, renglones):
 def CorregirRespuestas(preguntas, indices, renglones):
 
     respuestas_examen = []
-    correcion = []
+    correccion = []
 
     # Area de cada letra y respuestas correctas del examen
     areas_opciones = [(22, 'C'), (28, 'A'), (29,'D'), (33, 'B')]
@@ -209,19 +209,19 @@ def CorregirRespuestas(preguntas, indices, renglones):
 
         if respuesta_examen not in respuestas_correctas:
             print(f'{cont}. {respuesta_examen}')
-            correcion.append(respuesta_examen)
+            correccion.append(respuesta_examen)
         
         elif respuesta_examen == respuestas_correcta:
             print(f'{cont}. Correcta')
-            correcion.append('Correcta')
+            correccion.append('Correcta')
         
         else:
             print(f'{cont}. Incorrecta')
-            correcion.append('Incorrecta')
+            correccion.append('Incorrecta')
         
         cont += 1
     
-    return correcion
+    return correccion
 
 # ---------------------------------------Datos----------------------------------------------------------
 def DetectarIndicesDatos(img, renglon, plot=False):
@@ -359,11 +359,11 @@ for id in range(1,6):
     indices = DetectarIndices(preguntas, renglones)
 
     print(f' \nExamen Nro {id}. \n')
-    correcion = CorregirRespuestas(preguntas, indices, renglones)
+    correccion = CorregirRespuestas(preguntas, indices, renglones)
 
     indicesDatos = DetectarIndicesDatos(img, datos_row, plot=False)
     campo_nombre = CorregirDatos(img, indicesDatos, datos_row)
-    nombre_copia = MostrarCorreciones(correcion,  campo_nombre)
+    nombre_copia = MostrarCorreciones(correccion,  campo_nombre)
 
     lista_img.append(nombre_copia)
 
